@@ -1,0 +1,6 @@
+EruvStatusIntent
+EruvStatusIntent if the eruv is up
+EruvStatusIntent if the eruv is down
+EruvStatusIntent about the eruv
+EruvStatusIntent what is the status
+EruvStatusIntent what is the status of the eruv
