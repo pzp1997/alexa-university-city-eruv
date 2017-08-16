@@ -56,6 +56,6 @@ def _strip_tags(html):
 
 
 if __name__ == '__main__':
-    # app.config['ASK_APPLICATION_ID'] = (
-    #     'amzn1.ask.skill.89ae4a38-f08c-422c-8cbe-5109ec9b27b4')
-    app.run(debug=True)
+    app.config['ASK_APPLICATION_ID'] = (
+        'amzn1.ask.skill.d4ae690d-55d0-494c-9bd3-276fa4e7a9fb')
+    app.run(debug=False)
