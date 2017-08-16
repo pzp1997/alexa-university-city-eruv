@@ -1,3 +1,4 @@
+from HTMLParser import HTMLParser
 import logging
 
 from flask import Flask
@@ -10,19 +11,14 @@ ask = Ask(app, "/")
 logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 
-# General Helpers
-
-def _eruv_status():
-    return requests.get('http://www.universitycityeruv.org/status.php').text
-
-
-# Intent and Event Handlers
-
 @ask.launch
 @ask.intent('AMAZON.HelpIntent')
 @ask.intent('EruvStatusIntent')
 def instructions():
-    return statement(_eruv_status())
+    status = requests.get('http://www.universitycityeruv.org/status.php').text
+    status = _strip_tags(status)  # to strip away the <u></u> tag
+    status = status.replace('eruv', 'eiruv')  # for better pronunciation
+    return statement(status)
 
 
 @ask.intent('AMAZON.CancelIntent')
@@ -34,6 +30,29 @@ def stop():
 @ask.session_ended
 def session_ended():
     return '{}', 200
+
+
+# Strips HTML tags from a string
+# Created by Stack Overflow user Eloff in answer to the question
+# https://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
+
+class MLStripper(HTMLParser):
+
+    def __init__(self):
+        self.reset()
+        self.fed = []
+
+    def handle_data(self, d):
+        self.fed.append(d)
+
+    def get_data(self):
+        return ''.join(self.fed)
+
+
+def _strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 
 if __name__ == '__main__':
