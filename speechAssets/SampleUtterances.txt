@@ -1,4 +1,3 @@
-EruvStatusIntent
 EruvStatusIntent if the eruv is up
 EruvStatusIntent if the eruv is down
 EruvStatusIntent about the eruv

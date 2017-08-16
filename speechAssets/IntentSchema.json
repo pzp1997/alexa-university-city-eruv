@@ -1,7 +1,7 @@
 {
   "intents": [
     {
-      "intent": "EruvStatus"
+      "intent": "EruvStatusIntent"
     },
     {
       "intent": "AMAZON.CancelIntent"
